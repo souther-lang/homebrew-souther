@@ -2,7 +2,6 @@ class Souther < Formula
   desc "Small JVM language for building closed, executable business models"
   homepage "https://github.com/souther-lang/souther"
   url "https://github.com/souther-lang/souther/releases/download/v0.1.0/souther.jar"
-  version "0.1.0"
   sha256 "03066db9b225e577d11f42f67f903fcbd725c0c267bf099f85ce90be5f3850a8"
   license "EPL-2.0"
 
