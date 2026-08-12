@@ -7,6 +7,10 @@ class Souther < Formula
   version "0.1.0-rc4"
   sha256 "31d39aae4d0123267c0874e278152e5d84d2a545d121629d39e7401da319b419"
   license "EPL-2.0"
+  # 0.1.0 was tagged before rc1, so every release candidate since is lower than it by semantic
+  # versioning while being newer code. Without a scheme of its own the older tag outranks all of
+  # them: audit refuses the decrease, and an installed 0.1.0 never shows as outdated.
+  version_scheme 1
 
   depends_on "openjdk"
 
