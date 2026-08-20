@@ -2,6 +2,13 @@
 name: brew pr-pull
 
 on:
+  # Labelling a green pull request `pr-pull` publishes it. The label is the whole trigger, so
+  # only someone who can label — someone with write access — can start a publish, and a pull
+  # request from a fork cannot start one on its own.
+  pull_request_target:
+    types:
+      - labeled
+  # Kept as the manual way in, for a pull request whose label event has already been spent.
   workflow_dispatch:
     inputs:
       pull_request:
@@ -18,6 +25,9 @@ defaults:
 
 jobs:
   pr-pull:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.pull_request.labels.*.name, 'pr-pull')
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -43,8 +53,11 @@ jobs:
           HOMEBREW_GIT_COMMITTER_EMAIL: ${{ steps.git_setup.outputs.email }}
           HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.repository_owner }}
-          HEAD_SHA: ${{ inputs.head_sha }}
-          PULL_REQUEST: ${{ inputs.pull_request }}
+          # On the label trigger both of these come from the pull request, so the publish is
+          # pinned to the commit that was tested. A push after labelling fails the sha check
+          # instead of publishing something no CI has seen.
+          HEAD_SHA: ${{ inputs.head_sha || github.event.pull_request.head.sha }}
+          PULL_REQUEST: ${{ inputs.pull_request || github.event.pull_request.number }}
         run: |
           if [[ -n "$HEAD_SHA" ]]
           then
@@ -57,3 +70,9 @@ jobs:
         uses: Homebrew/actions/git-try-push@fd832223f9f99ebf0244dd20658680e5d4aca049 # 2026.08.03.2
         with:
           branch: main
+
+      - name: Delete branch
+        if: github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.fork == false
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: git push --delete origin "$BRANCH"

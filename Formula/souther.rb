@@ -2,8 +2,9 @@ class Souther < Formula
   desc "Small JVM language for building closed, executable business models"
   homepage "https://github.com/souther-lang/souther"
   url "https://github.com/souther-lang/souther/releases/download/v0.1.0-rc5/souther.jar"
-  # Homebrew reads "0.1.0" out of a "v0.1.0-rc5" URL, so a pre-release has to say which one it is.
-  # On a final tag this line is what `brew audit` calls redundant with the URL, and it comes off.
+  # Homebrew reads a release candidate's URL as plain "0.1.0", so the pre-release has to say which
+  # one it is. On a final tag this line is what `brew audit` calls redundant with the URL, and it
+  # comes off. Naming no version keeps `brew bump-formula-pr` from leaving the comment behind.
   version "0.1.0-rc5"
   sha256 "d04161c6de87291571b157eabdf327f6fe259b4dddf0edc728de453eef4336fc"
   license "EPL-2.0"
