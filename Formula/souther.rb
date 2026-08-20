@@ -1,27 +1,16 @@
 class Souther < Formula
   desc "Small JVM language for building closed, executable business models"
   homepage "https://github.com/souther-lang/souther"
-  url "https://github.com/souther-lang/souther/releases/download/v0.1.0-rc4/souther.jar"
-  # Homebrew reads "0.1.0" out of a "v0.1.0-rc4" URL, so a pre-release has to say which one it is.
+  url "https://github.com/souther-lang/souther/releases/download/v0.1.0-rc5/souther.jar"
+  # Homebrew reads "0.1.0" out of a "v0.1.0-rc5" URL, so a pre-release has to say which one it is.
   # On a final tag this line is what `brew audit` calls redundant with the URL, and it comes off.
-  version "0.1.0-rc4"
-  sha256 "31d39aae4d0123267c0874e278152e5d84d2a545d121629d39e7401da319b419"
+  version "0.1.0-rc5"
+  sha256 "d04161c6de87291571b157eabdf327f6fe259b4dddf0edc728de453eef4336fc"
   license "EPL-2.0"
-  # The jar behind this version has not changed; what is being rebuilt is the formula, so that a
-  # bottle exists for it. Without one Homebrew treats installing as building from source and refuses
-  # on any machine whose Command Line Tools are older than it wants — for a formula that unpacks a
-  # jar and writes a launcher, and compiles nothing at all.
-  revision 1
   # 0.1.0 was tagged before rc1, so every release candidate since is lower than it by semantic
   # versioning while being newer code. Without a scheme of its own the older tag outranks all of
   # them: audit refuses the decrease, and an installed 0.1.0 never shows as outdated.
   version_scheme 1
-
-  bottle do
-    root_url "https://github.com/souther-lang/homebrew-souther/releases/download/souther-0.1.0-rc4_1"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "93efae09c8d1974de058eb43d1c9b56088d06fb12c6743ef49e99fb8eecdd22b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "2a0e57e335798033e342437521fa7c34901e46d9c661405ef462778d1da33ba1"
-  end
 
   depends_on "openjdk"
 
