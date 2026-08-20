@@ -12,6 +12,12 @@ class Souther < Formula
   # them: audit refuses the decrease, and an installed 0.1.0 never shows as outdated.
   version_scheme 1
 
+  bottle do
+    root_url "https://github.com/souther-lang/homebrew-souther/releases/download/souther-0.1.0-rc5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "3ae4e4be04b739d9139f4db338209d876d020239503ad7086ea38cf8d3699ba0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "af749a495c7199dcf971a3802e251063fc2a4d995a963bfce18c475c26755d6d"
+  end
+
   depends_on "openjdk"
 
   def install
