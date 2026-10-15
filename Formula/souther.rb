@@ -9,6 +9,12 @@ class Souther < Formula
   # scheme is what an upgrade is judged against.
   version_scheme 1
 
+  bottle do
+    root_url "https://github.com/souther-lang/homebrew-souther/releases/download/souther-0.4.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "21223e1723e536778258c6042967ec9f50b73b3fc42cfabcdc1b10a1b5d26c20"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "6d7406f277a1f6c319c0ee642fe46f5838a49e4b5fd63b1598b83d7936ad7163"
+  end
+
   depends_on "openjdk"
 
   def install
