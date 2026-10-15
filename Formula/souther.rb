@@ -1,19 +1,13 @@
 class Souther < Formula
   desc "Small JVM language for building closed, executable business models"
   homepage "https://github.com/souther-lang/souther"
-  url "https://github.com/souther-lang/souther/releases/download/v0.3.0/souther.jar"
-  sha256 "902bfa6d9489c730a8e1db503c7cd35ac7bd0f901a379d136e06ec9c969a7691"
+  url "https://github.com/souther-lang/souther/releases/download/v0.4.0/souther.jar"
+  sha256 "a29a610ea0778052ea5203cfb24357c3c725d438510f1e0a59bf0087e0911581"
   license "EPL-2.0"
   # The release candidates were given a scheme so that they would outrank the version they carried,
   # and a scheme cannot be given back: audit refuses a decrease, and an installed formula's own
   # scheme is what an upgrade is judged against.
   version_scheme 1
-
-  bottle do
-    root_url "https://github.com/souther-lang/homebrew-souther/releases/download/souther-0.3.0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:  "24034cc851cab16d9160bae78ef45be9484aad132cf72524e857fba1e52dca46"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "38d227ddde9abd7314b8244fbe743403e06bbbb9b5dec8961800383ca03d7886"
-  end
 
   depends_on "openjdk"
 
